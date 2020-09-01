@@ -1,0 +1,36 @@
+stages:
+  - build
+  - deploy
+  - cleanup
+
+before_script:
+  - ssh-keyscan -H "servo.tssg.org" >> ~gitlab-runner/.ssh/known_hosts
+  - git submodule sync # apply patch
+  - echo "\nDone setting up repo\n"
+
+build:
+  stage: build
+  script:
+    - echo "Building image"
+    - cd docker/ && make build
+    - echo "Image build Complete"
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying"
+    - cd docker/ && make deploy
+    - make deploy
+    - echo "Deployment & Conversion Complete"
+
+cleanup:
+  when: always
+  stage: cleanup
+  script:
+    - cd docker/ && make destroy
+    - cd docker/ && make remove
+    - D=$(docker images -q -f "dangling=true")
+    - if [ -n "$D" ]; then
+    - docker rmi -f $D
+    - fi
+    - echo "Finished cleaning"
