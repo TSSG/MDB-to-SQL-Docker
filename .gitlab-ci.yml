@@ -10,6 +10,7 @@ before_script:
 
 build:
   stage: build
+  tags: [mdb-sql-converter]
   script:
     - echo "Building image"
     - cd docker/ && make build
@@ -17,6 +18,7 @@ build:
 
 deploy:
   stage: deploy
+  tags: [mdb-sql-converter]
   script:
     - echo "Deploying"
     - cd docker/ && make deploy
@@ -26,6 +28,7 @@ deploy:
 cleanup:
   when: always
   stage: cleanup
+  tags: [mdb-sql-converter]
   script:
     - cd docker/ && make destroy
     - cd docker/ && make remove
