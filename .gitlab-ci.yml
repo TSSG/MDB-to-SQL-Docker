@@ -22,7 +22,6 @@ deploy:
   script:
     - echo "Deploying"
     - cd docker/ && make deploy
-    - make deploy
     - echo "Deployment & Conversion Complete"
 
 cleanup:
