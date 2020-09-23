@@ -4,9 +4,23 @@ build:
 			docker build --rm -f $(CURDIR)/Dockerfile -t mdb_to_sql ..;
 
 deploy:
-			./dockerrun.sh;
-			docker cp ../mdb_converter.sh mdb_to_sql_converter:/home/ubuntu;
-			docker exec -i mdb_to_sql_converter /home/ubuntu/mdb_converter.sh;
+			./dockerrun.sh prod;
+			docker cp ../src/mdb_converter.sh mdb_to_sql_converter:/home/ubuntu/src;
+			docker exec -i mdb_to_sql_converter /home/ubuntu/src/mdb_converter.sh;
+
+test_errors:
+		./dockerrun.sh test;
+		docker cp ../src/mdb_converter.sh mdb_to_sql_converter:/home/ubuntu/src;
+		docker cp ../src/test/test_files/SOGNO_Waterford_broken.mdb mdb_to_sql_converter:/home/ubuntu/mdb_files
+		docker cp ../src/test/unit_tests_fail.sh mdb_to_sql_converter:/home/ubuntu/src;
+		docker exec -i mdb_to_sql_converter bats /home/ubuntu/src/unit_tests_fail.sh;
+
+test_pass:
+		./dockerrun.sh test;
+		docker cp ../src/mdb_converter.sh mdb_to_sql_converter:/home/ubuntu/src;
+		docker cp ../src/test/test_files/SOGNO_Waterford.mdb mdb_to_sql_converter:/home/ubuntu/mdb_files
+		docker cp ../src/test/unit_tests_pass.sh mdb_to_sql_converter:/home/ubuntu/src;
+		docker exec -i mdb_to_sql_converter bats /home/ubuntu/src/unit_tests_pass.sh;
 
 destroy:
 		docker rm -f mdb_to_sql_converter;
