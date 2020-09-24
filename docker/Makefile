@@ -6,7 +6,6 @@ build:
 deploy:
 			./dockerrun.sh prod;
 			docker cp ../src/mdb_converter.sh mdb_to_sql_converter:/home/ubuntu/src;
-			# docker exec -i mdb_to_sql_converter /home/ubuntu/src/mdb_converter.sh;
 
 convert:
 			docker exec -i mdb_to_sql_converter /home/ubuntu/src/mdb_converter.sh $(file)
