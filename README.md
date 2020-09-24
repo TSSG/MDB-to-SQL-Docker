@@ -2,7 +2,7 @@
 
 This is a Docker environment for converting Microsoft Access MDB files to Postgres SQL.
 
-When deployed, any MDB files supplied will be converted into a Postgres database, and will then be accessible from either within the Docker container through psql, port 5432 is exposed, as such the Docker container can be used as a data source for other applications.
+When deployed, any MDB files supplied will be converted into a [Postgres](https://www.postgresql.org/) database, and will then be accessible from either within the Docker container through psql, port 5432 is exposed, as such the Docker container can be used as a data source for other applications.
 
 This project makes use of [MDB-Tools](https://github.com/brianb/mdbtools)
 
@@ -30,7 +30,7 @@ To run this image, run the below command from the same `/docker` folder:
 
 > make deploy
 
-This will create a docker container named `mdb_to_sql_converter`, which you should see be able to see if you run the command:
+This will create a docker container named `mdb_to_sql_converter`, which you should be able to see if you run the command:
 
 > docker ps -a
 
@@ -51,7 +51,7 @@ Finished processing sample.mdb
 
 Which will let you know that the process has completed.
 
-Within the `mdb_to_sql_converter` container you will now have a Postgres database named `sample` with all your tables and data. 
+Within the `mdb_to_sql_converter` container you will now have a Postgres database named `sample` with all your tables and data.
 
 ## Removing Container and Images
 
