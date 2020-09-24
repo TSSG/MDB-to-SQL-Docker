@@ -21,8 +21,10 @@ else
   echo "Database ${lMdbBASE} created"
   # Export the schema
   mdb-schema --no-relations --no-indexes ${MDB} ${DBMS} | psql -q -d ${lMdbBASE}
+  # If there is a problem with the file
   if [ ${PIPESTATUS[0]} -eq 1 ]; then
     echo "Removing database ${lMdbBASE}"
+    # Drop the created database
     psql -U postgres -c "drop database ${lMdbBASE}"
     echo "${lMdbBASE} removed, exiting..."
     exit 1
