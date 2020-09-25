@@ -1,6 +1,6 @@
 stages:
   - build
-  - deploy
+  - test
   - cleanup
 
 before_script:
@@ -16,13 +16,22 @@ build:
     - cd docker/ && make build
     - echo "Image build Complete"
 
-deploy:
-  stage: deploy
+unit_test_pass:
+  stage: test
   tags: [mdb-sql-converter]
   script:
-    - echo "Deploying"
-    - cd docker/ && make deploy
-    - echo "Deployment & Conversion Complete"
+    - echo "Beginning tests for passing process"
+    - cd docker/ && make test_pass
+    - docker rm -f mdb_to_sql_converter
+    - echo "Tests complete"
+
+unit_test_fail:
+  stage: test
+  tags: [mdb-sql-converter]
+  script:
+    - echo "Beginning tests for failing process"
+    - cd docker/ && make test_errors
+    - echo "Tests complete"
 
 cleanup:
   when: always

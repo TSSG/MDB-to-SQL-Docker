@@ -2,7 +2,7 @@
 
 This is a Docker environment for converting Microsoft Access MDB files to Postgres SQL.
 
-When deployed, any MDB files supplied will be converted into a Postgres database, and will then be accessible from either within the Docker container through psql, port 5432 is exposed, as such the Docker container can be used as a data source for other applications.
+When deployed, any MDB files supplied will be converted into a [Postgres](https://www.postgresql.org/) database, and will then be accessible from either within the Docker container through psql, port 5432 is exposed, as such the Docker container can be used as a data source for other applications.
 
 This project makes use of [MDB-Tools](https://github.com/brianb/mdbtools)
 
@@ -13,8 +13,6 @@ The following must be installed prior to building and running the Docker environ
 - [Docker](https://www.docker.com/)
 
 - [GNU Make](https://www.gnu.org/software/make/)
-
-Before building the Docker environment, make sure to add the .mdb files you wish to convert into the `/input_files` folder.
 
 ## Building & Deployment
 
@@ -32,9 +30,28 @@ To run this image, run the below command from the same `/docker` folder:
 
 > make deploy
 
-This will create the docker container and run the conversion script against all files you have added to the `/input_files` folder.
+This will create a docker container named `mdb_to_sql_converter`, which you should be able to see if you run the command:
 
-Logs will run for each file, stating they have started and finished. Once all files are processed the message `Finished processing all files...` will be displayed on the terminal window.
+> docker ps -a
+
+## Converting Files
+
+Before converting any files, make sure to add them to the `/input_files` folder. As this folder is treated as a volume, you may add additional files later and convert them as you go.
+
+To convert a file, the command `make convert` is used, with a file name supplied (you do not have to add the .mdb extension). An example is shown below for a file named `sample.mdb`:
+
+> make convert file=sample
+
+You will see a number of log entries in the terminal while the conversion is running, but the final two are the most important:
+
+```console
+Completed populating all tables
+Finished processing sample.mdb
+```
+
+Which will let you know that the process has completed.
+
+Within the `mdb_to_sql_converter` container you will now have a Postgres database named `sample` with all your tables and data.
 
 ## Removing Container and Images
 
