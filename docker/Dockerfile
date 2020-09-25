@@ -4,10 +4,24 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt -y install postgresql-12 postgresql-client-12
 RUN apt-get update && apt-get install -y mdbtools
+RUN apt-get update && apt-get install -y git
+RUN git clone https://github.com/bats-core/bats-core.git
+RUN cd bats-core && ./install.sh /usr/local
+
 
 WORKDIR /home/ubuntu/
 
+RUN mkdir src
+RUN mkdir test_helper
+RUN mkdir mdb_files
+RUN git clone https://github.com/ztombol/bats-support test_helper/bats-support
+RUN git clone https://github.com/bats-core/bats-assert test_helper/bats-assert
 RUN chown postgres /home/ubuntu/
+RUN chown postgres /home/ubuntu/src/
+RUN chown postgres /home/ubuntu/mdb_files
+
+WORKDIR /home/ubuntu/src/
+
 USER postgres
 
 RUN /etc/init.d/postgresql start
