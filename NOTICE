@@ -1,0 +1,17 @@
+MDB to SQL Converter in Docker
+Copyright 2020 Waterford Institute of Technology.
+
+This product includes software developed at the
+Telecommunications Software and Systems Group (http://www.tssg.org/) at the
+Waterford Institute of Technology.
+
+This work is partly funded by the European Comission through the H2020 SOGNO
+project (Grant 774613).
+
+This software contains code derived from Docker.
+
+This software contains code derived from Postgres.
+
+This software contains code derived from MDB-Tools.
+
+This software contains code derived from BATS.
