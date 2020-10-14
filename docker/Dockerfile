@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER Darren Leniston <dleniston@tssg.org>
+LABEL maintainer="dleniston@tssg.org"
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt -y install postgresql-12 postgresql-client-12
