@@ -61,11 +61,19 @@ The tests can be run from the `/docker` folder using the following commands:
 
 - Testing a valid file:
 
+<<<<<<< HEAD
 > test_pass
 
 - Testing an invalid file:
 
 > test_errors
+=======
+> make test_pass
+
+- Testing an invalid file:
+
+> make test_errors
+>>>>>>> 308f72c21bff98bcf9a22a14e930ac623c3dd927
 
 ## Removing Container and Images
 
