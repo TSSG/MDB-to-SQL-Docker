@@ -1,3 +1,7 @@
+# Copyright Waterford Institute of Technology 2018
+# Telecommunications Software and Systems Group (TSSG)
+# Author Darren Leniston <dleniston@tssg.org>
+
 load '../test_helper/bats-support/load'
 load '../test_helper/bats-assert/load'
 
