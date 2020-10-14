@@ -1,5 +1,9 @@
 # !/bin/bash
 
+# Copyright Waterford Institute of Technology 2018
+# Telecommunications Software and Systems Group (TSSG)
+# Author Darren Leniston <dleniston@tssg.org>
+
 CONTAINER="mdb_to_sql_converter"
 
 if [ "$(docker ps -q -a -f name=${CONTAINER})" ]; then
