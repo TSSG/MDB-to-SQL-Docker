@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Copyright Waterford Institute of Technology 2018
+# Telecommunications Software and Systems Group (TSSG)
+# Author Darren Leniston <dleniston@tssg.org>
+
 FILE=$1
 DBMS=postgres
 
